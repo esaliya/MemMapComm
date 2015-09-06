@@ -22,6 +22,7 @@ public class Program {
 
         double[] points = readPoints(pointsFile, numPoints);
         // Alright, everyone knows what points the writers will write by now as they already have full set of points array.
+        System.out.println("INIT: Rank " + worldProcRank + " done reading points.");
 
         String pointsFileName = "points.bin";
         String lockFileName = "lock.bin";
@@ -67,6 +68,7 @@ public class Program {
                 writerBytes.position(i * Double.BYTES);
                 writerBytes.writeDouble(points[i + myOffset]);
             }
+            System.out.println("WRITE: Rank " + worldProcRank + " done writing to points to memory map");
 
             lockBytes.busyLockInt(0);
             // Write I am done
@@ -81,6 +83,7 @@ public class Program {
                 Thread.sleep(5);
             }
 
+            System.out.println("MMAPREAD: Rank " + worldProcRank + " starting to read from memory map");
             double[] readValues = new double[numPoints];
             for (int i = 0; i < numPoints; ++i){
                 readValues[i] = readerBytes.readDouble(i*Double.BYTES);
