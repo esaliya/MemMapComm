@@ -32,11 +32,13 @@ public class Program {
                                                          pointsFileName),
                                                StandardOpenOption.CREATE,
                                                StandardOpenOption.WRITE,
-                                               StandardOpenOption.READ);
+                                               StandardOpenOption.READ,
+                                               StandardOpenOption.DELETE_ON_CLOSE);
             FileChannel lc = FileChannel.open(Paths.get(tmpDir, lockFileName),
                                               StandardOpenOption.CREATE,
                                               StandardOpenOption.WRITE,
-                                              StandardOpenOption.READ)) {
+                                              StandardOpenOption.READ,
+                                              StandardOpenOption.DELETE_ON_CLOSE)) {
 
             // Fancy load balancing of points
             // The idea is to equally divide points (q per rank) among ranks,
