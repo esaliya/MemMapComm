@@ -96,6 +96,7 @@ public class Program {
                     System.out.println("Inconsistent rank " + worldProcRank + " " + i + " expected " + points[i] + " found " + readValues[i]);
                 }
             }
+            System.out.println("END: Rank " + worldProcRank + " completed.");
         }
         catch (IOException e) {
             e.printStackTrace();
