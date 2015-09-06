@@ -1,5 +1,6 @@
 package org.saliya.memmapcomm;
 
+import net.openhft.affinity.AffinitySupport;
 import net.openhft.lang.io.ByteBufferBytes;
 import net.openhft.lang.io.Bytes;
 
@@ -13,6 +14,7 @@ import java.util.stream.IntStream;
 
 public class Program {
     public static void main(String[] args) throws InterruptedException {
+        AffinitySupport.setThreadId();
         String tmpDir = args[0];
         String pointsFile = args[1];
         int numPoints = Integer.parseInt(args[2]);
