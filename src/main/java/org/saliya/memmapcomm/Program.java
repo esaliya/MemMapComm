@@ -74,17 +74,17 @@ public class Program {
             }
             System.out.println("WRITE: Rank " + worldProcRank + " done writing points to memory map");
 
-            lockBytes.busyLockInt(0);
-            System.out.println("DEBUG: Rank " + worldProcRank + " got the lock and no one else should print this");
+//            lockBytes.busyLockInt(0);
+//            System.out.println("DEBUG: Rank " + worldProcRank + " got the lock and no one else should print this");
             // Write I am done
             lockBytes.addAndGetInt(4, 1);
 //            lockBytes.unlockInt(0);
             // Now wait
-            /*while(true){
+            while(true){
                 System.out.println("INLOOP: Rank " + worldProcRank);
-                lockBytes.busyLockInt(0);
-                int count = lockBytes.readInt(4);
-                lockBytes.unlockInt(0);
+//                lockBytes.busyLockInt(0);
+                int count = lockBytes.getAndAdd(4,0);
+//                lockBytes.unlockInt(0);
                 if (count == worldProcCount) break;
                 Thread.sleep(5);
             }
@@ -100,7 +100,7 @@ public class Program {
                     System.out.println("Inconsistent rank " + worldProcRank + " " + i + " expected " + points[i] + " found " + readValues[i]);
                 }
             }
-            System.out.println("END: Rank " + worldProcRank + " completed.");*/
+            System.out.println("END: Rank " + worldProcRank + " completed.");
         }
         catch (IOException e) {
             e.printStackTrace();
