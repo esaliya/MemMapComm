@@ -60,7 +60,7 @@ public class Program {
             // A lock is needed only to know when all the writers
             // are done writing, so each reader can start reading.
             // Note. writers write to non conflicting mappings, so they don't need a lock
-            Bytes lockBytes = ByteBufferBytes.wrap(fc.map(
+            Bytes lockBytes = ByteBufferBytes.wrap(lc.map(
                 FileChannel.MapMode.READ_WRITE, 0, 8));
 
             for (int i = 0; i < mySize; ++i){
