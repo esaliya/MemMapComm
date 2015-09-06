@@ -72,7 +72,7 @@ public class Program {
                 writerBytes.position(i * Double.BYTES);
                 writerBytes.writeDouble(points[i + myOffset]);
             }
-            System.out.println("WRITE: Rank " + worldProcRank + " done writing to points to memory map");
+            System.out.println("WRITE: Rank " + worldProcRank + " done writing points to memory map");
 
             lockBytes.busyLockInt(0);
             // Write I am done
@@ -80,6 +80,7 @@ public class Program {
             lockBytes.unlockInt(0);
             // Now wait
             while(true){
+                System.out.println("INLOOP: Rank " + worldProcRank);
                 lockBytes.busyLockInt(0);
                 int count = lockBytes.readInt(4);
                 lockBytes.unlockInt(0);
